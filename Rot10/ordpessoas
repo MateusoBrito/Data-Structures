@@ -1,0 +1,70 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+typedef struct{
+    char nome[20];
+    int idade;
+}Pessoa;
+
+
+
+void troca(int *a, int *b){
+   int aux = *a;
+   *a=*b;
+   *b=aux;
+}
+
+
+void InsertionSort(Pessoa *v, int n){
+   char *atual;
+   int j;
+   for(int i=1; i<n; i++){
+       atual = v[i].nome;
+       for(j=i; (j>0)&&(strcmp(atual,v[j-1].nome));j--){
+           v[j] = v[j-1];
+       }
+       v[j] = atual;
+   }
+}
+atual<v[j-1]
+
+void SelectionSort(int *v, int n){
+   int menor;
+   for(int i=0;i<n-1;i++){
+       menor = i;
+       for(int j=i+1; j<n; j++){
+           if(v[j]<v[menor])
+               menor = j;
+       }
+       if(i != menor){
+           troca(&v[i], &v[menor]);
+       }
+   }
+}
+
+int main(){
+   int tamanho;
+   printf("Qual o Tamanho do vetor?\n");
+   scanf("%d",&tamanho);
+
+
+   Pessoa vetor[tamanho];
+   for(int i=0;i<tamanho;i++){
+       printf("Nome[%d]: ",i);
+       fgets(vetor[i].nome,20,stdin);
+       printf("Idade[%d]: ",i);
+       scanf("%d", &vetor[i].idade);
+       printf("\n");
+   }
+
+
+   SelectionSort(vetor,tamanho);
+   printf("==============================\n");
+   for(int i=0;i<tamanho;i++){
+       printf("vetor[%d]: %d\n",i, vetor[i]);
+   }
+
+
+   return 0;
+}
